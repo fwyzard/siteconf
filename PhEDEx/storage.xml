@@ -1,0 +1,21 @@
+<storage-mapping>
+
+  <!-- Map any LFN with /store/ to xrootd on EOS -->
+  <lfn-to-pfn protocol="eos"
+    path-match="/+store/(.*)"
+    result="root://eoscms.cern.ch//eos/cms/store/$1"/>
+
+  <!-- Fallback to Tier-0 xrootd pool -->
+  <lfn-to-pfn protocol="tier0" destination-match=".*"
+    path-match="/+store/(.*)"
+    result="root://eoscms.cern.ch//eos/cms/tier0/store/$1"/>
+
+  <!-- Reverse rules -->
+  <pfn-to-lfn protocol="eos"
+    path-match="root://eoscms.cern.ch//eos/cms/store/(.*)"
+    result="/store/$1"/>
+  <pfn-to-lfn protocol="tier0"
+    path-match="root://eoscms.cern.ch//eos/cms/tier0/store/(.*)"
+    result="/store/$1"/>
+
+</storage-mapping>
